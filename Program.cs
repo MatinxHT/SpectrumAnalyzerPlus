@@ -55,6 +55,7 @@ namespace PolynomialRegressionSpectrometerCalibration
             }
         }
 
+        #region Linear Algebra
 
         // 构建矩阵的函数
         static double[,] BuildMatrix(int n, double[] pixeLlist)
@@ -165,6 +166,8 @@ namespace PolynomialRegressionSpectrometerCalibration
 
             return solution;
         }
+
+        #endregion
     }
 }
 
