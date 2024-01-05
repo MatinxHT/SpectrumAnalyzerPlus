@@ -1,1 +1,1 @@
-# LinearEquationSolver
+# PolynomialRegressionSpectrometerCalibration
