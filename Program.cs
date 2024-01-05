@@ -22,6 +22,8 @@ namespace PolynomialRegressionSpectrometerCalibration
             // 使用高斯消元法求解
             double[] solution = GaussianElimination(coefficients);
 
+            //double[] solution = GaussianElimination(coefficients)
+
             //target a0 = 164
             // 打印解向量
             Console.WriteLine("Solution: ");
