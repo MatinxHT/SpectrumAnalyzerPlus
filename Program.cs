@@ -25,10 +25,12 @@ namespace PolynomialRegressionSpectrometerCalibration
             //target a0 = 164
             // 打印解向量
             Console.WriteLine("Solution: ");
-            Console.WriteLine($"a0 = {solution[0]}");
-            Console.WriteLine($"a1 = {solution[1]}");
-            Console.WriteLine($"a2 = {solution[2]}");
-            Console.WriteLine($"a3 = {solution[3]}");
+            for (int i = 0; i < solution.Length; i++)
+            {
+                Console.WriteLine($"a{i} = {solution[i]}");
+            }
+
+
         }
         // 打印矩阵的函数（用于调试）
         static void PrintMatrix(double[,] matrix)
