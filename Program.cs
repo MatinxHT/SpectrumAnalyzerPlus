@@ -10,10 +10,10 @@ namespace PolynomialRegressionSpectrometerCalibration
             // 构建增广矩阵
 
             //double[] pixellist = {234.5,394.5,538.5,648,735,939.5,1052,1145};
-            double[] pixellist = { 234.5, 541, 1052, 1711 };
+            double[] pixellist = { 234.5, 394.5,538.5, 1052, 1711 };
             double[,] matrix = BuildMatrix(pixellist);
             //double[] wavelength = { 235, 313, 365, 404,435,546,579 ,763};
-            double[] wavelength = { 235, 365, 546, 763 };
+            double[] wavelength = { 235,313, 365, 579, 763 };
             double[,] coefficients = BuildAugmentedMatrix(matrix, wavelength);
             // 打印增广矩阵
             PrintMatrix(coefficients);
@@ -71,31 +71,52 @@ namespace PolynomialRegressionSpectrometerCalibration
             int n = pixeLlist.Length;
 
             double[,] result = new double[n, 1];
+            ////a0
+            //for (int i = 0; i < n; i++)
+            //{
+            //    result[i, 0] = 1;
+            //}
+            ////a1
+            //result = BuildAugmentedMatrix(result, pixeLlist);
+            ////a2
+            //double[] a2list = new double[pixeLlist.Length];
+            //for (int i = 0; i < pixeLlist.Length; i++)
+            //{
+            //    a2list[i] = Math.Pow(pixeLlist[i], 2);
+            //}
+            //result = BuildAugmentedMatrix(result, a2list);
+            ////a3
+            //double[] a3list = new double[pixeLlist.Length];
+            //for (int i = 0; i < pixeLlist.Length; i++)
+            //{
+            //    a3list[i] = Math.Pow(pixeLlist[i], 3);
+            //}
+            //result = BuildAugmentedMatrix(result, a3list);
+
             //a0
             for (int i = 0; i < n; i++)
             {
                 result[i, 0] = 1;
             }
-            //a1
-            result = BuildAugmentedMatrix(result, pixeLlist);
-            //a2
-            double[] a2list = new double[pixeLlist.Length];
-            for (int i = 0; i < pixeLlist.Length; i++)
+            double[] powerlist = new double[n];
+            int j = 1;
+            while (j <= n)
             {
-                a2list[i] = Math.Pow(pixeLlist[i], 2);
+                for (int i = 0; i < pixeLlist.Length; i++)
+                    powerlist[i]= Math.Pow(pixeLlist[i], j);
+                result = BuildAugmentedMatrix(result, powerlist);
+                j++;
             }
-            result = BuildAugmentedMatrix(result, a2list);
-            //a3
-            double[] a3list = new double[pixeLlist.Length];
-            for (int i = 0; i < pixeLlist.Length; i++)
-            {
-                a3list[i] = Math.Pow(pixeLlist[i], 3);
-            }
-            result = BuildAugmentedMatrix(result, a3list);
 
             return result;
         }
 
+        /// <summary>
+        /// 给矩阵增加一列，或者说构建增广矩阵
+        /// </summary>
+        /// <param name="coefficients"></param>
+        /// <param name="constants"></param>
+        /// <returns></returns>
         static double[,] BuildAugmentedMatrix(double[,] coefficients, double[] constants)
         {
             int rows = coefficients.GetLength(0);
