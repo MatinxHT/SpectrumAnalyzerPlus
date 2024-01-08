@@ -11,8 +11,7 @@ namespace PolynomialRegressionSpectrometerCalibration
 
             //double[] pixellist = {234.5,394.5,538.5,648,735,939.5,1052,1145};
             double[] pixellist = { 234.5, 541, 1052, 1711 };
-            int n = pixellist.Length;
-            double[,] matrix = BuildMatrix(n, pixellist);
+            double[,] matrix = BuildMatrix(pixellist);
             //double[] wavelength = { 235, 313, 365, 404,435,546,579 ,763};
             double[] wavelength = { 235, 365, 546, 763 };
             double[,] coefficients = BuildAugmentedMatrix(matrix, wavelength);
@@ -59,11 +58,18 @@ namespace PolynomialRegressionSpectrometerCalibration
             }
         }
 
+        // 构建矩阵的函数
         #region Linear Algebra
 
-        // 构建矩阵的函数
-        static double[,] BuildMatrix(int n, double[] pixeLlist)
+        /// <summary>
+        /// 根据峰数n构建n*n初始矩阵的函数
+        /// </summary>
+        /// <param name="pixeLlist">锋对应的像素序号</param>
+        /// <returns></returns>
+        static double[,] BuildMatrix(double[] pixeLlist)
         {
+            int n = pixeLlist.Length;
+
             double[,] result = new double[n, 1];
             //a0
             for (int i = 0; i < n; i++)
