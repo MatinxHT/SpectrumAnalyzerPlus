@@ -11,17 +11,17 @@ namespace PolynomialRegressionSpectrometerCalibration
 
             //double[] pixellist = {234.5,394.5,538.5,648,735,939.5,1052,1145};
             double[] pixellist = { 234.5, 394.5,538.5, 1052, 1711 };
-            double[,] matrix = BuildMatrix(pixellist);
+            double[,] matrix = BuildMatrix(4,pixellist);
             //double[] wavelength = { 235, 313, 365, 404,435,546,579 ,763};
             double[] wavelength = { 235,313, 365, 579, 763 };
-            double[,] coefficients = BuildAugmentedMatrix(matrix, wavelength);
-            // 打印增广矩阵
-            PrintMatrix(coefficients);
+
+            //new way
+            int ranklevel = 4;
+            double[,] coefficient = AnotherBuildAugmentedMatrix(ranklevel, pixellist, wavelength);
+            PrintMatrix(coefficient);
 
             // 使用高斯消元法求解
-            double[] solution = GaussianElimination(coefficients);
-
-            //double[] solution = GaussianElimination(coefficients)
+            double[] solution = GaussianElimination(coefficient);
 
             //target a0 = 164
             // 打印解向量
@@ -66,11 +66,9 @@ namespace PolynomialRegressionSpectrometerCalibration
         /// </summary>
         /// <param name="pixeLlist">锋对应的像素序号</param>
         /// <returns></returns>
-        static double[,] BuildMatrix(double[] pixeLlist)
+        static double[,] BuildMatrix(int ranklevel,double[] pixeLlist)
         {
-            int n = pixeLlist.Length;
-
-            double[,] result = new double[n, 1];
+            double[,] result = new double[ranklevel, 1];
             ////a0
             //for (int i = 0; i < n; i++)
             //{
@@ -94,15 +92,15 @@ namespace PolynomialRegressionSpectrometerCalibration
             //result = BuildAugmentedMatrix(result, a3list);
 
             //a0
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < ranklevel; i++)
             {
                 result[i, 0] = 1;
             }
-            double[] powerlist = new double[n];
+            double[] powerlist = new double[ranklevel];
             int j = 1;
-            while (j <= n)
+            while (j < ranklevel)
             {
-                for (int i = 0; i < pixeLlist.Length; i++)
+                for (int i = 0; i < ranklevel; i++)
                     powerlist[i]= Math.Pow(pixeLlist[i], j);
                 result = BuildAugmentedMatrix(result, powerlist);
                 j++;
@@ -135,6 +133,28 @@ namespace PolynomialRegressionSpectrometerCalibration
 
             return augmentedMatrix;
         }
+
+        static double[,] AnotherBuildAugmentedMatrix(int ranklevel,double[] pixellist, double[] wavelengthlist)
+        {
+            double[,] matrix = BuildMatrix(ranklevel, pixellist);
+
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1) + 1; // 常数向量增加一列
+
+            double[,] augmentedMatrix = new double[rows, cols];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols - 1; j++)
+                {
+                    augmentedMatrix[i, j] = matrix[i, j];
+                }
+                augmentedMatrix[i, cols - 1] = wavelengthlist[i]; // 最后一列是常数向量
+            }
+
+            return augmentedMatrix;
+        }
+
 
         // 高斯消元法
         static double[] GaussianElimination(double[,] matrix)
