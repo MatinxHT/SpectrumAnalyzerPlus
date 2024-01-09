@@ -11,7 +11,7 @@ namespace PolynomialRegressionSpectrometerCalibration
 
             //double[] pixellist = {234.5,394.5,538.5,648,735,939.5,1052,1145};
             double[] pixellist = { 234.5, 394.5,538.5, 1052, 1711 };
-            double[,] matrix = BuildMatrix(4,pixellist);
+            //double[,] matrix = BuildMatrix(4,pixellist);
             //double[] wavelength = { 235, 313, 365, 404,435,546,579 ,763};
             double[] wavelength = { 235,313, 365, 579, 763 };
 
