@@ -10,13 +10,13 @@ namespace PolynomialRegressionSpectrometerCalibration
             // 构建增广矩阵
 
             //double[] pixellist = {234.5,394.5,538.5,648,735,939.5,1052,1145};
-            double[] pixellist = { 234.5, 394.5,538.5, 1052, 1711 };
+            double[] pixellist = { 171.5,564,805,876.5 };
             //double[,] matrix = BuildMatrix(4,pixellist);
             //double[] wavelength = { 235, 313, 365, 404,435,546,579 ,763};
-            double[] wavelength = { 235,313, 365, 579, 763 };
+            double[] wavelength = { 253,435,546,576};
 
             //new way
-            int ranklevel = 4;
+            int ranklevel = 3;
             double[,] coefficient = AnotherBuildAugmentedMatrix(ranklevel, pixellist, wavelength);
             PrintMatrix(coefficient);
 
