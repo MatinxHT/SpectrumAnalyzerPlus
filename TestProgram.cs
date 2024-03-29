@@ -4,7 +4,7 @@ using SpectrumAnalyzerPlus.Algorithms;
 
 namespace SpectrumAnalyzerPlus
 {
-    class Program
+    class TestProgram
     {
         static void Main()
         {

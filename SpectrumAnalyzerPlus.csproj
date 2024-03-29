@@ -8,14 +8,15 @@
     <Authors>MartinHung</Authors>
     <Copyright>Foshan Double-Brilliant Technology Co.,Ltd</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <RepositoryUrl>https://github.com/MatinxHT/SpectrumAnalyzerPlus</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>
