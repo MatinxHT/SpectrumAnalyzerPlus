@@ -15,14 +15,14 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build SpectrumAnalyzerPlus.csproj --configuration Release
       working-directory: ${{ github.workspace }}
     - name: Run unit tests
-      run: dotnet test --configuration Release
+      run: dotnet test SpectrumAnalyzerPlus.csproj --configuration Release
       working-directory: ${{ github.workspace }}
     - name: Generate nuget package
-      run: dotnet pack --configuration Release -o nupkg
+      run: dotnet pack SpectrumAnalyzerPlus.csproj --configuration Release -o nupkg
       working-directory: ${{ github.workspace }}
     - name: Push nuget package
-      run: dotnet nuget push **/*.nupkg -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.CHROMATICITYDOTNETAPI}} --skip-duplicate
+      run: dotnet nuget push **/*.nupkg -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.SPECTRUMANALYZERPLUS}} --skip-duplicate
       working-directory: ${{ github.workspace }}
