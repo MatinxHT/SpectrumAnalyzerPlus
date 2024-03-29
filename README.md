@@ -1,5 +1,6 @@
-# PolynomialRegressionSpectrometerCalibration
+# SpectrumAnalyzerPlus
 
+## Target
 using  polynomial for CMOS pixel-lamda Regression.polynomial as following..
 
 
@@ -7,3 +8,8 @@ using  polynomial for CMOS pixel-lamda Regression.polynomial as following..
 
 
 pixel means the counter number of CMOS senor
+
+but now wanna do more things...
+
+## Todo 
+All about  Spectrum Analyze
