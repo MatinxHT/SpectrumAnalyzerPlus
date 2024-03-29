@@ -9,11 +9,39 @@ namespace SpectrumAnalyzerPlus.Algorithms
     public class LinearAlgebra
     {
         /// <summary>
+        /// 构建增广矩阵
+        /// </summary>
+        /// <param name="ranklevel"></param>
+        /// <param name="pixellist"></param>
+        /// <param name="wavelengthlist"></param>
+        /// <returns></returns>
+        public static double[,] AnotherBuildAugmentedMatrix(int ranklevel, double[] pixellist, double[] wavelengthlist)
+        {
+            double[,] matrix = BuildMatrix(ranklevel, pixellist);
+
+            int rows = matrix.GetLength(0);
+            int cols = matrix.GetLength(1) + 1; // 常数向量增加一列
+
+            double[,] augmentedMatrix = new double[rows, cols];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols - 1; j++)
+                {
+                    augmentedMatrix[i, j] = matrix[i, j];
+                }
+                augmentedMatrix[i, cols - 1] = wavelengthlist[i]; // 最后一列是常数向量
+            }
+
+            return augmentedMatrix;
+        }
+
+        /// <summary>
         /// 根据峰数n构建n*n初始矩阵的函数
         /// </summary>
         /// <param name="pixeLlist">锋对应的像素序号</param>
         /// <returns></returns>
-        public static double[,] BuildMatrix(int ranklevel, double[] pixeLlist)
+        private static double[,] BuildMatrix(int ranklevel, double[] pixeLlist)
         {
             double[,] result = new double[ranklevel, 1];
 
@@ -36,12 +64,12 @@ namespace SpectrumAnalyzerPlus.Algorithms
         }
 
         /// <summary>
-        /// 给矩阵增加一列，或者说构建增广矩阵
+        /// 构建增广矩阵，或者说给矩阵增加一列
         /// </summary>
         /// <param name="coefficients"></param>
         /// <param name="constants"></param>
         /// <returns></returns>
-        public static double[,] BuildAugmentedMatrix(double[,] coefficients, double[] constants)
+        private static double[,] BuildAugmentedMatrix(double[,] coefficients, double[] constants)
         {
             int rows = coefficients.GetLength(0);
             int cols = coefficients.GetLength(1) + 1; // 常数向量增加一列
@@ -59,28 +87,6 @@ namespace SpectrumAnalyzerPlus.Algorithms
 
             return augmentedMatrix;
         }
-
-        public static double[,] AnotherBuildAugmentedMatrix(int ranklevel, double[] pixellist, double[] wavelengthlist)
-        {
-            double[,] matrix = BuildMatrix(ranklevel, pixellist);
-
-            int rows = matrix.GetLength(0);
-            int cols = matrix.GetLength(1) + 1; // 常数向量增加一列
-
-            double[,] augmentedMatrix = new double[rows, cols];
-
-            for (int i = 0; i < rows; i++)
-            {
-                for (int j = 0; j < cols - 1; j++)
-                {
-                    augmentedMatrix[i, j] = matrix[i, j];
-                }
-                augmentedMatrix[i, cols - 1] = wavelengthlist[i]; // 最后一列是常数向量
-            }
-
-            return augmentedMatrix;
-        }
-
 
         /// <summary>
         /// 高斯消元法
