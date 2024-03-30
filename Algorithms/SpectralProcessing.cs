@@ -101,5 +101,17 @@ namespace SpectrumAnalyzerPlus.Algorithms
 
             return peakList;
         }
+        public static List<int> DerivativeFindPeaks(int[] data)
+        {
+            // Convert int[] to double[]
+            double[] doubleData = new double[data.Length];
+            for (int i = 0; i < data.Length; i++)
+            {
+                doubleData[i] = data[i];
+            }
+
+            // Call existing DerivativeFindPeaks function for double[]
+            return DerivativeFindPeaks(doubleData);
+        }
     }
 }
