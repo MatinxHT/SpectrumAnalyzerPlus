@@ -1,5 +1,9 @@
 # SpectrumAnalyzerPlus
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![.NET C#](https://img.shields.io/badge/.NET-C%23-blue)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/SpectrumAnalyzerPlus)
+
 ## Target
 using  polynomial for CMOS pixel-lamda Regression.polynomial as following..
 
