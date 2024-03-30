@@ -74,6 +74,32 @@ namespace SpectrumAnalyzerPlus.Algorithms
             return ema;
         }
 
+        /// <summary>
+        /// 导数寻峰算法
+        /// </summary>
+        /// <param name="data">原始光谱数据</param>
+        /// <returns>峰对应的序号</returns>
+        public static List<int> DerivativeFindPeaks(double[] data)
+        {
+            List<int> peakList = new List<int>();
 
+            // Calculate average intensity
+            double averageIntensity = data.Average();
+
+            // Calculate derivative and find peaks
+            for (int i = 0; i < data.Length - 1; i++)
+            {
+                // Calculate derivative
+                double derivative = data[i + 1] - data[i];
+
+                // Check if it's a peak
+                if (derivative > 0 && data[i] > averageIntensity && data[i + 1] > averageIntensity)
+                {
+                    peakList.Add(i);
+                }
+            }
+
+            return peakList;
+        }
     }
 }
