@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpectrumAnalyzerPlus.Algorithms
 {
+    /// <summary>
+    /// 光谱数据的处理算法
+    /// </summary>
     public class SpectralProcessing
     {
         /// <summary>

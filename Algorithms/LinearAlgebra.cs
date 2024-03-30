@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpectrumAnalyzerPlus.Algorithms
 {
+    /// <summary>
+    /// 线性代数的算法
+    /// </summary>
     public class LinearAlgebra
     {
         /// <summary>
