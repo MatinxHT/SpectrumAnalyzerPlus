@@ -87,20 +87,46 @@ namespace SpectrumAnalyzerPlus.Algorithms
             double averageIntensity = data.Average();
 
             // Calculate derivative and find peaks
-            for (int i = 0; i < data.Length - 1; i++)
-            {
-                // Calculate derivative
-                double derivative = data[i + 1] - data[i];
+            //for (int i = 0; i < data.Length - 2; i++)
+            //{
+            //    // Calculate derivative
+            //    double derivative = data[i + 1] - data[i];
+            //    double nextDerivative = data[i + 2] - data[i + 1];
 
-                // Check if it's a peak
-                if (derivative > 0 && data[i] > averageIntensity && data[i + 1] > averageIntensity)
+            //    // Check if it's a peak
+            //    if (derivative * nextDerivative < 0 && data[i] > averageIntensity && data[i + 1] > averageIntensity)
+            //    {
+            //        peakList.Add(i);
+            //    }
+            //}
+
+            double[] hills = new double[data.Length];
+            // Calculate derivative and find peaks
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] > averageIntensity) hills[i] = 1;else hills[i] = 0;
+            }
+
+            double hillstart = -1;
+            double hillend = -1;
+            for(int i = 0;i<hills.Length;i++)
+            {
+                if (hills[i] == 1 && hillstart == -1)
                 {
-                    peakList.Add(i);
+                    hillstart = i;
+                }
+                if (hills[i]== 0 && hillstart != -1)
+                {
+                    hillend = i;
+                    peakList.Add((int)(hillstart + hillend) / 2);
+                    hillstart = -1;
+                    hillend = -1;
                 }
             }
 
             return peakList;
         }
+
         public static List<int> DerivativeFindPeaks(int[] data)
         {
             // Convert int[] to double[]
