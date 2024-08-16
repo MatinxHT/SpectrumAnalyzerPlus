@@ -84,7 +84,7 @@ namespace SpectrumAnalyzerPlus.Algorithms
             List<int> peakList = new List<int>();
 
             // Calculate average intensity
-            double averageIntensity = data.Average();
+            double averageIntensity = data.Average()+100;
 
             // Calculate derivative and find peaks
             //for (int i = 0; i < data.Length - 2; i++)
